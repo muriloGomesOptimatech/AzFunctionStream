@@ -3,7 +3,7 @@ from azurefunctions.extensions.http.fastapi import Request, StreamingResponse
 from time import sleep
 from teste_trigger import teste_trigger
 
-app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
+app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
 app.register_blueprint(teste_trigger)
 
 def generate_sensor_data():
@@ -15,7 +15,7 @@ def generate_sensor_data():
         yield f"data: {{'temperature': {temperature}, 'humidity': {humidity}}}\n\n"
         sleep(2.5)
 
-
+@teste_trigger.function_name(name="stream")
 @app.route(route="stream", methods=[func.HttpMethod.GET])
 async def stream_sensor_data(req: Request) -> StreamingResponse:
     """Endpoint to stream real-time sensor data."""

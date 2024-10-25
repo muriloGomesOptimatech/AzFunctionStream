@@ -11,6 +11,7 @@ import logging
 teste_trigger = func.Blueprint()
 
 
+@teste_trigger.function_name(name="http_trigger")
 @teste_trigger.route(route="http_trigger", auth_level=func.AuthLevel.ANONYMOUS)
 def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
