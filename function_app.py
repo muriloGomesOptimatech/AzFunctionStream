@@ -15,7 +15,7 @@ def generate_sensor_data():
         yield f"data: {{'temperature': {temperature}, 'humidity': {humidity}}}\n\n"
         sleep(2.5)
 
-@teste_trigger.function_name(name="stream")
+@app.function_name(name="stream")
 @app.route(route="stream", methods=[func.HttpMethod.GET])
 async def stream_sensor_data(req: Request) -> StreamingResponse:
     """Endpoint to stream real-time sensor data."""
