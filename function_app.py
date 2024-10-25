@@ -1,8 +1,10 @@
 import azure.functions as func
 from azurefunctions.extensions.http.fastapi import Request, StreamingResponse
 from time import sleep
+from teste_trigger import teste_trigger
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
+app.register_blueprint(teste_trigger)
 
 def generate_sensor_data():
     """Generate real-time sensor data."""
